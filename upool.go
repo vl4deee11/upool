@@ -15,8 +15,7 @@ type Test struct {
 	B  []byte
 }
 
-// TODO: use code generation like c++ template class
-const maxInChunks = 10
+const maxInChunks = 100
 const size = int(unsafe.Sizeof(Test{}))
 
 type UPool struct {
@@ -83,7 +82,6 @@ func (p *UPool) Get() *Test {
 	p.currOffset += size
 	return (*Test)(unsafe.Pointer(&p.memChunks[p.currChunk][p.currOffset-size]))
 }
-
 
 //Return struct to pool
 func (p *UPool) Return(st *Test) {
